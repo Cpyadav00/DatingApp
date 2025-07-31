@@ -157,3 +157,9 @@ D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\System.IdentityModel
 D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
 D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Data\UserSeedData.json
+D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Learning\FullStackProject\DatingApp\API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Learning\FullStackProject\DatingApp\API\obj\Debug\net9.0\API.MvcApplicationPartsAssemblyInfo.cs
