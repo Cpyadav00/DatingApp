@@ -1,20 +1,38 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountService } from '../../core/services/account-service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ToastService } from '../../core/services/toast-service';
+import { themes } from '../theme';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
-  imports: [FormsModule,RouterLink,RouterLinkActive],
+  imports: [FormsModule,RouterLink,RouterLinkActive,UpperCasePipe],
   templateUrl: './nav.html',
   styleUrl: './nav.css'
 })
-export class Nav {
+export class Nav implements OnInit {
+
   private router=inject(Router);
   protected accountService=inject(AccountService);
   private toast=inject(ToastService);
  protected creds:any={};
+ protected selectedTheme=signal<string>(localStorage.getItem('theme') ||'light');
+ protected themes=themes;
+
+
+   ngOnInit(): void {
+     document.documentElement.setAttribute('data-theme',this.selectedTheme());
+  }
+
+ handleSelectTheme(theme:string){
+ this.selectedTheme.set(theme);
+ localStorage.setItem('theme',theme);
+ document.documentElement.setAttribute('data-theme',theme);
+ const elem=document.activeElement as HTMLDivElement;
+ if(elem) elem.blur();
+ }
 
  login()
  {

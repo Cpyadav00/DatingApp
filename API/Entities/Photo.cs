@@ -12,7 +12,6 @@ public class Photo
     //navigation property
     [JsonIgnore]
     public Member Member { get; set; } = null!;
-    [JsonIgnore]
     public string MemberId { get; set; } = null!;
 
 }
