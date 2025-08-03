@@ -40,6 +40,7 @@ return this.http.post<User>(this.baseUrl+'account/register',creds).pipe(
 
   logOut(){
     localStorage.removeItem('user');
+    localStorage.removeItem('filters');
     this.currectUser.set(null);
   }
 
