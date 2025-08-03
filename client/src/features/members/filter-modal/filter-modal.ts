@@ -26,6 +26,7 @@ memberParams=model(new MemberParams());
 
 open(){
   this.modalRef.nativeElement.showModal();
+  //console.log(this.memberParams())
 }
 close()
 {
