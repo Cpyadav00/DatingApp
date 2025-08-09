@@ -6,10 +6,11 @@ import { ToastService } from '../../core/services/toast-service';
 import { themes } from '../theme';
 import { UpperCasePipe } from '@angular/common';
 import { BusyService } from '../../core/services/busy-service';
+import { HasRole } from '../../shared/directives/has-role';
 
 @Component({
   selector: 'app-nav',
-  imports: [FormsModule,RouterLink,RouterLinkActive,UpperCasePipe],
+  imports: [FormsModule,RouterLink,RouterLinkActive,UpperCasePipe,HasRole],
   templateUrl: './nav.html',
   styleUrl: './nav.css'
 })

@@ -16,15 +16,15 @@
             @if (accountService.currectUser();) {
             <a routerLink="/members" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact:true}">Matches</a>
             <a routerLink="/lists" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact:true}">Lists</a>
-            <a routerLink="/messages" routerLinkActive="text-accent"
-                [routerLinkActiveOptions]="{exact:true}">Messages</a>
+            <a routerLink="/messages" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact:true}">Messages</a>
+            <a *appHasRole="['Admin','Moderator']" routerLink="/admin" routerLinkActive="text-accent" [routerLinkActiveOptions]="{exact:true}">Admin</a>
             }
             <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
         </nav>
 
 
         @if (busyServic.busyRequestCount()>0) {
-            <span class="loading loading-spinner text-accent"></span>
+        <span class="loading loading-spinner text-accent"></span>
         }
 
         <div class="flex align-middle ml-auto gap-3">
@@ -41,9 +41,9 @@
                 </button>
                 <ul tabindex="1" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow-sm">
                     @for (theme of themes; track $index) {
-                        <li (click)="handleSelectTheme(theme)">
-                            <a>{{theme | uppercase}}</a>
-                        </li>
+                    <li (click)="handleSelectTheme(theme)">
+                        <a>{{theme | uppercase}}</a>
+                    </li>
                     }
                 </ul>
             </div>
