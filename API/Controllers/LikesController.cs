@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class LikesController(ILikeRepository likeRepository) : BaseApiController
+public class LikesController(IUnitOfWork uow) : BaseApiController
 {
     [HttpPost("{targetMemberId}")]
     public async Task<ActionResult> ToggleLike(string targetMemberId)
     {
         var sourceMemberId = User.GetMemberId();
         if (sourceMemberId == targetMemberId) return BadRequest("You cannot like yourself");
-        var existingLike = await likeRepository.GetMemberLike(sourceMemberId, targetMemberId);
+        var existingLike = await uow.LikeRepository.GetMemberLike(sourceMemberId, targetMemberId);
         if (existingLike == null)
         {
             var memberLike = new MemberLike
@@ -22,27 +22,27 @@ public class LikesController(ILikeRepository likeRepository) : BaseApiController
                 SourceMemberId = sourceMemberId,
                 TargetMemberId = targetMemberId
             };
-            likeRepository.AddLike(memberLike);
+            uow.LikeRepository.AddLike(memberLike);
         }
         else
         {
-            likeRepository.DeleteLike(existingLike);
+            uow.LikeRepository.DeleteLike(existingLike);
         }
-        if (await likeRepository.SaveAllChanges()) return Ok();
+        if (await uow.Complete()) return Ok();
         return BadRequest("Failed to like");
     }
 
     [HttpGet("list")]
     public async Task<ActionResult<IReadOnlyList<string>>> GetCurrentMemberIds()
     {
-        return Ok(await likeRepository.GetCurrentMemberLikeIds(User.GetMemberId()));
+        return Ok(await uow.LikeRepository.GetCurrentMemberLikeIds(User.GetMemberId()));
     }
 
     [HttpGet]
     public async Task<ActionResult<PaginatedResult<Member>>> GetMemberLike([FromQuery] LikesParams likesParams)
     {
         likesParams.MemberId = User.GetMemberId();
-        var members = await likeRepository.GetMemberLikes(likesParams);
+        var members = await uow.LikeRepository.GetMemberLikes(likesParams);
         return Ok(members);
     }
 

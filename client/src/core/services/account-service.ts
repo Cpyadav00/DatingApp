@@ -68,10 +68,15 @@ return this.http.post<User>(this.baseUrl+'account/register',creds, {withCredenti
   }
 
   logOut(){
+    this.http.post(this.baseUrl+'account/logout',{},{withCredentials:true}).subscribe({
+      next:()=>{
     localStorage.removeItem('filters');
     this.likeService.clearLikeIds();
     this.currectUser.set(null);
     this.presenceService.stopHubConnection();
+      }
+    })
+
   }
 
   private getRolesFromToken(user:User):string[]

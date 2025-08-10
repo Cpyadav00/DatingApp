@@ -21,15 +21,7 @@ protected isOnline=computed(()=>this.presenceService.onlineUsers().includes(this
 toggleLike(event:Event)
 {
   event.stopPropagation();
-  this.likeService.toggleLike(this.member().id).subscribe({
-    next:()=>{
-      if(this.hasLike()){
-        this.likeService.likeIds.update(ids=>ids.filter(x=>x !== this.member().id))
-      }else{
-        this.likeService.likeIds.update(ids=> [...ids,this.member().id])
-      }
-    }
-  })
+  this.likeService.toggleLike(this.member().id)
 }
 
 
