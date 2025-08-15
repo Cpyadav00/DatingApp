@@ -1,10 +1,19 @@
 <dialog #dialogRef class="modal">
-    <div class="modal-box">
-        <h3 class="font-bold tesxt-lg">{{message}}</h3>
-        <p class="py-2">This action cannot be undone</p>
-        <div class="modal-action">
-     <button class="btn btn-outline" (click)="cancel()">Cancel</button>
-     <button class="btn btn-primary" (click)="confirm()">Confirm</button>
-        </div>
+  <div class="modal-box w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl">
+    <!-- Title -->
+    <h3 class="font-bold text-lg sm:text-xl md:text-2xl break-words">
+      {{ message }}
+    </h3>
+
+    <!-- Description -->
+    <p class="py-2 text-sm sm:text-base md:text-lg">
+      This action cannot be undone
+    </p>
+
+    <!-- Actions -->
+    <div class="modal-action flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
+      <button class="btn btn-outline w-full sm:w-auto" (click)="cancel()">Cancel</button>
+      <button class="btn btn-primary w-full sm:w-auto" (click)="confirm()">Confirm</button>
     </div>
+  </div>
 </dialog>

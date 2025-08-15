@@ -25,7 +25,7 @@ export class ImageUpload {
     this.isDragging=false;
   }
 
-    onDop(event:DragEvent){
+    onDrop(event:DragEvent){
     event.preventDefault();
     event.stopPropagation();
     this.isDragging=false;

@@ -1,28 +1,36 @@
-<label class="floating-label text-left">
-                <span>{{label()}}</span>
-                <input type="text" class="input w-full" 
-                [type]="type()"
-                [max]="maxDate()"
-                [class.input-error]="Control.invalid && Control.dirty" 
-                [class.input-success]="Control.valid && Control.touched" 
-                [formControl]="Control" 
-                [placeholder]="label()">
-                @if (Control.hasError('required') && Control.touched) {
-                    <div class="validation-hint text-error text-xs">{{label()}} is required</div>
-                }
-                @if (Control.hasError('email') && Control.touched) {
-                    <div class="validation-hint text-error text-xs">Invalid email address</div>
-                }
-                @if (Control.hasError('minlength') && Control.touched) {
-                    <div class="validation-hint text-error text-xs">
-                    {{label()}} must be at least {{Control.errors?.['minlength'].requiredLength}} characters</div>
-                }
-                @if (Control.hasError('maxlength') && Control.touched) {
-                    <div class="validation-hint text-error text-xs">
-                    {{label()}} must be at most {{Control.errors?.['maxlength'].requiredLength}} characters</div>
-                }
-                @if (Control.hasError('passwordMismatch') && Control.touched) {
-                    <div class="validation-hint text-error text-xs">
-                    Password do not match</div>
-                }
-            </label>
+<label class="floating-label block w-full">
+  <span class="block text-sm md:text-base lg:text-lg font-medium mb-1">{{ label() }}</span>
+  
+  <input 
+    class="input w-full text-sm md:text-base lg:text-lg px-3 py-2 rounded-lg border focus:outline-none focus:ring-2 
+           focus:ring-primary transition-all duration-200
+           [class.input-error]='Control.invalid && Control.dirty' 
+           [class.input-success]='Control.valid && Control.touched'"
+    [type]="type()"
+    [max]="maxDate()"
+    [formControl]="Control"
+    [placeholder]="label()"
+  />
+
+  @if (Control.hasError('required') && Control.touched) {
+    <div class="validation-hint text-error text-xs sm:text-sm mt-1">{{ label() }} is required</div>
+  }
+  @if (Control.hasError('email') && Control.touched) {
+    <div class="validation-hint text-error text-xs sm:text-sm mt-1">Invalid email address</div>
+  }
+  @if (Control.hasError('minlength') && Control.touched) {
+    <div class="validation-hint text-error text-xs sm:text-sm mt-1">
+      {{ label() }} must be at least {{ Control.errors?.['minlength'].requiredLength }} characters
+    </div>
+  }
+  @if (Control.hasError('maxlength') && Control.touched) {
+    <div class="validation-hint text-error text-xs sm:text-sm mt-1">
+      {{ label() }} must be at most {{ Control.errors?.['maxlength'].requiredLength }} characters
+    </div>
+  }
+  @if (Control.hasError('passwordMismatch') && Control.touched) {
+    <div class="validation-hint text-error text-xs sm:text-sm mt-1">
+      Passwords do not match
+    </div>
+  }
+</label>

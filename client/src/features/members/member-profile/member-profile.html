@@ -1,45 +1,81 @@
 @if (memberService.member(); as member) {
-<div class="flex flex-col gap-3">
-    <div class="flex gap-3">
-        <span class="font-semibold">Member since:</span>
-        <span>{{member.created | date:'longDate'}}</span>
-    </div>
-    <div class="flex gap-3">
-        <span class="font-semibold">Last active:</span>
-        <span>{{member.lastActive | timeAgo}}</span>
-    </div>
-    <h3 class="text-lg font-semibold text-primary">About {{member.displayName}}</h3>
-    @if (memberService.editMode()) {
-    <form #editForm="ngForm" (ngSubmit)="updateProfile()" class="flex flex-col w-full gap-4">
+<div class="flex flex-col gap-4 p-4 sm:p-6 max-w-3xl mx-auto">
 
-        <label class="floating-label">
+    <!-- Member Info Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:gap-8 gap-3 text-sm sm:text-base">
+        <div class="flex gap-2 sm:gap-3">
+            <span class="font-semibold">Member since:</span>
+            <span>{{ member.created | date:'longDate' }}</span>
+        </div>
+        <div class="flex gap-2 sm:gap-3">
+            <span class="font-semibold">Last active:</span>
+            <span>{{ member.lastActive | timeAgo }}</span>
+        </div>
+    </div>
+
+    <!-- Heading -->
+    <h3 class="text-base sm:text-lg font-semibold text-primary">
+        About {{ member.displayName }}
+    </h3>
+
+    <!-- Edit Mode -->
+    @if (memberService.editMode()) {
+    <form #editForm="ngForm"
+          (ngSubmit)="updateProfile()"
+          class="flex flex-col w-full gap-4">
+
+        <!-- Display Name -->
+        <label class="floating-label w-full">
             <span>Display Name</span>
-            <input class="input w-full" name="displayName" [(ngModel)]="editableMember.displayName"
-                placeholder="Display Name">
+            <input class="input w-full text-sm sm:text-base"
+                   name="displayName"
+                   [(ngModel)]="editableMember.displayName"
+                   placeholder="Display Name">
         </label>
-        <label class="floating-label">
+
+        <!-- Description -->
+        <label class="floating-label w-full">
             <span>Description</span>
-            <textarea class="textarea w-full" name="description" [(ngModel)]="editableMember.description"
-                placeholder="Description"></textarea>
+            <textarea class="textarea w-full text-sm sm:text-base"
+                      name="description"
+                      [(ngModel)]="editableMember.description"
+                      placeholder="Description"></textarea>
         </label>
-        <label class="floating-label">
+
+        <!-- City -->
+        <label class="floating-label w-full">
             <span>City</span>
-            <input class="input w-full" name="city" [(ngModel)]="editableMember.city" placeholder="City">
+            <input class="input w-full text-sm sm:text-base"
+                   name="city"
+                   [(ngModel)]="editableMember.city"
+                   placeholder="City">
         </label>
-        <label class="floating-label">
+
+        <!-- Country -->
+        <label class="floating-label w-full">
             <span>Country</span>
-            <input class="input w-full" name="country" [(ngModel)]="editableMember.country" placeholder="Country">
+            <input class="input w-full text-sm sm:text-base"
+                   name="country"
+                   [(ngModel)]="editableMember.country"
+                   placeholder="Country">
         </label>
-        <div class="flex self-end">
+
+        <!-- Submit Button -->
+        <div class="flex justify-end">
             <button 
-            [disabled]="!editForm.dirty"
-            type="submit" 
-            class="btn btn-success"
-            >Submit</button>
+                [disabled]="!editForm.dirty"
+                type="submit"
+                class="btn btn-success px-3 py-1 sm:px-5 sm:py-2 text-xs sm:text-sm">
+                Submit
+            </button>
         </div>
     </form>
-    }@else {
-    <div>{{member.description || 'No description provided yet'}}</div>
+    }
+    @else {
+    <!-- View Mode -->
+    <div class="text-sm sm:text-base">
+        {{ member.description || 'No description provided yet' }}
+    </div>
     }
 
 </div>

@@ -1,23 +1,27 @@
 <div class="flex flex-col w-full mb-3">
-    <div class="flex justify-between items-center">
-        <div class="tabs tabs-border tabs-lg text-primary">
-            @for (tab of tabs; track $index) {
-                <button 
-                class="tab"
-                [hidden]="tab.value === 'roles' && !accountService.currectUser()?.roles?.includes('Admin')"
-                [class.tab-active]="activeTab===tab.value"
-                (click)="setTab(tab.value)"
-                >{{tab.label}}</button>
-            }
-
-        </div>
-
+  <div class="flex flex-wrap justify-between items-center">
+    <!-- Tabs container -->
+    <div class="tabs tabs-border text-primary overflow-x-auto whitespace-nowrap flex-grow">
+      @for (tab of tabs; track $index) {
+        <button
+          class="tab px-3 py-2 text-sm md:text-base"
+          [hidden]="tab.value === 'roles' && !accountService.currectUser()?.roles?.includes('Admin')"
+          [class.tab-active]="activeTab === tab.value"
+          (click)="setTab(tab.value)"
+        >
+          {{ tab.label }}
+        </button>
+      }
     </div>
+  </div>
 </div>
 
-@if (activeTab==='roles') {
-    <app-user-management/>
-}
-@if (activeTab==='photos') {
-    <app-photo-management/>
-}
+<!-- Content sections -->
+<div class="mt-4 w-full">
+  @if (activeTab === 'roles') {
+    <app-user-management />
+  }
+  @if (activeTab === 'photos') {
+    <app-photo-management />
+  }
+</div>

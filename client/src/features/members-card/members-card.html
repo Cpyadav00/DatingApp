@@ -1,32 +1,50 @@
-@if(member(); as member){
+@if (member(); as member) {
+<div 
+  routerLink="/members/{{member.id}}" 
+  class="card cursor-pointer transition-all duration-300 
+         ease-in-out transform hover:-translate-y-2 relative 
+         w-full sm:w-60 md:w-72">
 
-<div routerLink="/members/{{member.id}}" class="card cursor-pointer transition-all duration-300 
-ease-in-out transform hover:-translate-y-2 relative">
-    <img src="{{member?.imageUrl || 'user.png'}}" alt="{{member.displayName}} image" class="rounded-lg">
+    <!-- Member Image -->
+    <img 
+      src="{{member?.imageUrl || 'user.png'}}" 
+      alt="{{member.displayName}} image" 
+      class="rounded-lg w-full h-48 sm:h-56 md:h-64 object-cover">
+
+    <!-- Online Status -->
     @if (isOnline()) {
-        <span class="status status-success status-xl absolute top-3 left-3"></span>
+      <span 
+        class="status status-success absolute top-1.5 left-1.5
+               w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full border-2 border-white">
+      </span>
     }
-    <button (click)="toggleLike($event)" class="absolute top-1 right-1 z-40 btn btn-ghost btn-circle">
+
+    <!-- Like Button -->
+    <button 
+      (click)="toggleLike($event)" 
+      class="absolute top-1 right-1 z-40 btn btn-ghost btn-circle 
+             p-0.5 sm:p-1">
         <svg xmlns="http://www.w3.org/2000/svg" 
-        [attr.fill]="hasLike() ? 'red' : 'none'" 
-        viewBox="0 0 24 24" 
-        stroke-width="1.5" 
-        stroke="currentColor"
-            class="size-7">
+          [attr.fill]="hasLike() ? 'red' : 'none'" 
+          viewBox="0 0 24 24" 
+          stroke-width="1.5" 
+          stroke="currentColor"
+          class="w-4 h-4 sm:w-5 sm:h-5">
             <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
-
     </button>
+
+    <!-- Info Section -->
     <div class="card-actions z-40 
-    absolute bottom-0 w-full px-3 py-1 rounded-b-lg
-    bg-gradient-to-t from-black via-black/75 to-black/0
-    ">
+                absolute bottom-0 w-full px-2 py-1 sm:px-3 sm:py-2 rounded-b-lg
+                bg-gradient-to-t from-black via-black/75 to-black/0">
         <div class="flex flex-col text-white">
-            <span class="font-semibold"> {{member.displayName}}, {{member.dateOfBirth | age}}</span>
-            <span class="text-sm">{{member.city}}</span>
+            <span class="font-semibold text-xs sm:text-sm md:text-base truncate">
+              {{member.displayName}}, {{member.dateOfBirth | age}}
+            </span>
+            <span class="text-[10px] sm:text-xs md:text-sm truncate">{{member.city}}</span>
         </div>
     </div>
 </div>
-
 }

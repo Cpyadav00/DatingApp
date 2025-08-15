@@ -1,19 +1,33 @@
-<div class="flex items-center w-full gap-3 py-3">
-    <span>Items per page:</span>
-    <select class="select w-24" (change)="onPageChange(undefined,$event.target)">
+<div class="flex flex-wrap items-center w-full gap-2 sm:gap-3 md:gap-4 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm">
+    
+    <!-- Items per page -->
+    <span class="whitespace-nowrap">Items per page:</span>
+    <select 
+        class="select select-xs sm:select-sm md:select-md w-16 sm:w-20 md:w-24"
+        (change)="onPageChange(undefined, $event.target)">
         @for (size of pageZizeOptions(); track $index) {
-            <option [value]="size" [selected]="size===pageSize()">{{size}}</option>
+            <option [value]="size" [selected]="size === pageSize()">{{ size }}</option>
         }
     </select>
-    <div class="text-sm">
-   {{(pageNumber()-1) * pageSize() + 1}} - {{lastItemIndex()}} of {{totalCount()}}
+
+    <!-- Item count display -->
+    <div class="text-[10px] sm:text-xs md:text-sm whitespace-nowrap">
+        {{ (pageNumber() - 1) * pageSize() + 1 }} - {{ lastItemIndex() }} of {{ totalCount() }}
     </div>
-    <div class="flex items-center gap-2">
-     <button class="btn btn-circle btn-ghost"
-     [disabled]="pageNumber()===1" (click)="onPageChange(pageNumber()-1)"
-     >&larr;</button>
-          <button class="btn btn-circle btn-ghost"
-     [disabled]="pageNumber()>=totalPage()" (click)="onPageChange(pageNumber()+1)"
-     >&rarr;</button>
+
+    <!-- Pagination buttons -->
+    <div class="flex items-center gap-1 sm:gap-2 md:gap-3 mt-1 sm:mt-0">
+        <button 
+            class="btn btn-2xs sm:btn-xs md:btn-sm btn-circle btn-ghost"
+            [disabled]="pageNumber() === 1"
+            (click)="onPageChange(pageNumber() - 1)">
+            &larr;
+        </button>
+        <button 
+            class="btn btn-2xs sm:btn-xs md:btn-sm btn-circle btn-ghost"
+            [disabled]="pageNumber() >= totalPage()"
+            (click)="onPageChange(pageNumber() + 1)">
+            &rarr;
+        </button>
     </div>
 </div>
